@@ -3,7 +3,6 @@ import 'bulma/css/bulma.css';
 import './App.scss';
 import cn from 'classnames';
 
-
 enum SortType {
   None = 'none',
   Alphabet = 'alphabet',
