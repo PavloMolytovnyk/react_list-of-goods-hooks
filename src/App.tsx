@@ -3,16 +3,17 @@ import 'bulma/css/bulma.css';
 import './App.scss';
 import cn from 'classnames';
 
-interface Sorting {
-  goods: string[];
-  sorting: string;
-  isReverse: boolean;
-}
 
 enum SortType {
-  None = 'none', 
-  Alphabet = 'alphabet', 
-  Length = 'length'
+  None = 'none',
+  Alphabet = 'alphabet',
+  Length = 'length',
+}
+
+interface Sorting {
+  goods: string[];
+  sorting: SortType;
+  isReverse: boolean;
 }
 
 export const goodsFromServer = [
@@ -29,9 +30,9 @@ export const goodsFromServer = [
 ];
 
 function sort({ goods, sorting, isReverse }: Sorting) {
-  const SortGoods = [...goods];
+  const sortGoods = [...goods];
 
-  SortGoods.sort((good1, good2) => {
+  sortGoods.sort((good1, good2) => {
     switch (sorting) {
       case SortType.Alphabet:
         return good1.localeCompare(good2);
@@ -43,10 +44,10 @@ function sort({ goods, sorting, isReverse }: Sorting) {
   });
 
   if (isReverse) {
-    SortGoods.reverse();
+    sortGoods.reverse();
   }
 
-  return SortGoods;
+  return sortGoods;
 }
 
 export const App: React.FC = () => {
@@ -109,7 +110,7 @@ export const App: React.FC = () => {
       <ul>
         <ul>
           {newVisibleGoods.map((good: string) => (
-            <li data-cy="Good" key={goodsFromServer.indexOf(good)}>
+            <li data-cy="Good" key={good}>
               {good}
             </li>
           ))}
