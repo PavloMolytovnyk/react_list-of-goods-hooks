@@ -4,9 +4,9 @@ import './App.scss';
 import cn from 'classnames';
 
 interface Sorting {
-  goods: string[],
-  sorting: string,
-  isReverse: boolean,
+  goods: string[];
+  sorting: string;
+  isReverse: boolean;
 }
 
 export const goodsFromServer = [
@@ -26,7 +26,6 @@ const SET_SORT_ALPHABET: string = 'alphabet';
 const SET_SORT_LENGTH: string = 'length';
 
 function sort({ goods, sorting, isReverse }: Sorting) {
-
   const SortGoods = [...goods];
 
   SortGoods.sort((good1, good2) => {
@@ -38,14 +37,13 @@ function sort({ goods, sorting, isReverse }: Sorting) {
       default:
         return 0;
     }
-  })
+  });
 
   if (isReverse) {
     SortGoods.reverse();
   }
 
   return SortGoods;
-
 }
 
 export const App: React.FC = () => {
@@ -64,7 +62,7 @@ export const App: React.FC = () => {
         <button
           type="button"
           className={cn(
-            `button is-info ${sortField === SET_SORT_ALPHABET ? '' : 'is-light' }`,
+            `button is-info ${sortField === SET_SORT_ALPHABET ? '' : 'is-light'}`,
           )}
           onClick={() => SetSortField(SET_SORT_ALPHABET)}
         >
@@ -74,7 +72,7 @@ export const App: React.FC = () => {
         <button
           type="button"
           className={cn(
-            `button is-success ${sortField === SET_SORT_LENGTH ? '' : 'is-light' }`,
+            `button is-success ${sortField === SET_SORT_LENGTH ? '' : 'is-light'}`,
           )}
           onClick={() => SetSortField(SET_SORT_LENGTH)}
         >
@@ -84,7 +82,7 @@ export const App: React.FC = () => {
         <button
           type="button"
           className={cn(
-            `button is-warning ${isReverse === true ? '' : 'is-light' }`,
+            `button is-warning ${isReverse === true ? '' : 'is-light'}`,
           )}
           onClick={() => SetIsReverse(!isReverse)}
         >
@@ -108,7 +106,9 @@ export const App: React.FC = () => {
       <ul>
         <ul>
           {newVisibleGoods.map(good => (
-            <li data-cy="Good">{good}</li>
+            <li data-cy="Good" key={goodsFromServer.indexOf(good)}>
+              {good}
+            </li>
           ))}
         </ul>
       </ul>
